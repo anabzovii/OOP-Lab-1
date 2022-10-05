@@ -31,8 +31,6 @@ bool search();
 
 void queue_size();
 
-void check();
-
 void first_element();
 
 
@@ -55,15 +53,13 @@ void main()
 
         printf("5. Get the first element of the queue\n");
 
-        printf("6. Get the number of entries in the queue\n");
+        printf("6. Reverse\n");
 
-        printf("7. Reverse\n");
+        printf("7. Sort\n");
 
-        printf("8. Sort\n");
+        printf("8. Search\n");
 
-        printf("9. Search\n");
-
-        printf("10. Exit\n");
+        printf("9. Exit\n");
 
         scanf("%d", &choice);
 
@@ -91,32 +87,26 @@ void main()
 
         case 4: 
 
-            check();
+            first_element();
 
             break;
 
         case 5: 
 
-            first_element();
+            queue_size();
 
             break;
 
         case 6: 
 
-            queue_size();
-
-            break;
-
-        case 7: 
-
             ReverseQ(); 
             break;
 
-        case 8:
+        case 7:
             Sort();
             break;  
 
-        case 9:
+        case 8:
             printf("\nSearch For: ");
             scanf("%d", &val);
             search(val);
@@ -130,7 +120,7 @@ void main()
             }
             break;     
 
-        case 10:
+        case 9:
             exit(0);   
 
         default: 
@@ -238,19 +228,6 @@ void delete()
    }
    front=prev;
    
-}
-
-int count()
-{
-   struct node *q;
-   q = front;
-   int co = 0;
-   while (q!=NULL)
-   {
-      co++;
-      q=q->link;
-   }
-   return co;
 }
 
 void Sort()
