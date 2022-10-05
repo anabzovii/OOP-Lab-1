@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define MAX 21
 
  
-
 struct node
 
 {
@@ -23,21 +23,25 @@ void insert();
 
 void delete();
 
+void ReverseQ();
+
+void Sort();
+
+bool search();
+
 void queue_size();
 
 void check();
 
 void first_element();
 
- 
 
 void main()
 
 {
 
-    int choice, value;
+    int choice, val;
 
- 
 
     while(1)
 
@@ -53,7 +57,13 @@ void main()
 
         printf("6. Get the number of entries in the queue\n");
 
-        printf("7. Exit\n");
+        printf("7. Reverse\n");
+
+        printf("8. Sort\n");
+
+        printf("9. Search\n");
+
+        printf("10. Exit\n");
 
         scanf("%d", &choice);
 
@@ -99,7 +109,29 @@ void main()
 
         case 7: 
 
-            exit(0);
+            ReverseQ(); 
+            break;
+
+        case 8:
+            Sort();
+            break;  
+
+        case 9:
+            printf("\nSearch For: ");
+            scanf("%d", &val);
+            search(val);
+            if (search(val)==true)
+            {
+                printf("\nThe Element is in queue!\n");
+            }
+            else
+            {
+                printf("\nThe Element is missing from queue!\n");
+            }
+            break;     
+
+        case 10:
+            exit(0);   
 
         default: 
 
@@ -190,7 +222,84 @@ void delete()
 
 }
 
+ void ReverseQ()
+{
+   struct node* current;
+   struct node* nxt;
+   struct node* prev = NULL;
+   struct node* temp;
+   current = front;
+   while (current!=NULL)
+   {
+      temp=current->link;
+      current->link=prev;
+      prev=current;
+      current=temp;
+   }
+   front=prev;
+   
+}
+
+int count()
+{
+   struct node *q;
+   q = front;
+   int co = 0;
+   while (q!=NULL)
+   {
+      co++;
+      q=q->link;
+   }
+   return co;
+}
+
+void Sort()
+{
+    struct node** q;
+    int i, j, swapped;
+    int countQ = count(front);
+    for (i = 0; i <= countQ; i++) {
  
+        q = &front;
+        swapped = 0;
+ 
+        for (j = 0; j < countQ - i - 1; j++) {
+ 
+            struct node* p1 = *q;
+            struct node* p2 = p1->link;
+ 
+            if (p1->data > p2->data) {
+
+                  struct node* tmp = p2->link;
+                  p2->link = p1;
+                  p1->link = tmp;
+                  *q = p2;
+
+                swapped = 1;
+            }
+ 
+            q = &(*q)->link;
+        }
+
+        if (swapped == 0)
+            break;
+    }
+}
+
+bool search(int val)
+{
+   struct node *curr;
+   curr=front;
+   while (curr!=NULL)
+   {
+      if (curr->data==val)
+      {
+         return true;
+      }
+      curr=curr->link;
+   }
+   return false;
+};
 
 // check if queue is empty or not
 
