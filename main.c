@@ -8,7 +8,6 @@
 struct node
 
 {
-
     int data;
 
     struct node *link;
@@ -51,7 +50,7 @@ void main()
 
         printf("1 : create an empty queue \n2 : Insert element\n");
 
-        printf("3 : Dequeue an element \n4 : Check if empty\n");
+        printf("3 : Dequeue an element \n");
 
         printf("4. Get the first element of the queue\n");
 
